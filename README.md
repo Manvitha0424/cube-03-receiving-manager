@@ -2293,6 +2293,18 @@
     updateHistory();
 
 </script>
+<h2>Project Outputs</h2>
 
+<h3>Output 1</h3>
+<img src="./Output1.png" alt="Project Output 1" width="800">
+
+<h3>Output 2</h3>
+<img src="./Output2.png" alt="Project Output 2" width="800">
+
+<h3>Output 3</h3>
+<img src="./Output3.png" alt="Project Output 3" width="800">
+
+</body>
+</html>
 </body>
 </html>
