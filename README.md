@@ -2,14 +2,14 @@
 
 The Receiving Manager is a decoupled frontend/backend application intended to orchestrate visual inventory inspection and evidence management.
 
-**IMPORTANT: This repository currently contains a sophisticated UI prototype wired to a deterministic mock backend. It does NOT currently contain a real AI, Machine Learning model, or Vision Language Model (VLM).**
+**IMPORTANT: This repository currently contains a sophisticated UI prototype wired to a dual-mode backend. It supports both deterministic demo scenarios and a real Vision Language Model (VLM) via OpenAI.**
 
 ## Round 3 Integration Status
 - Local frontend/backend integration: COMPLETE
 - Local API validation: COMPLETE
 - Tenant/auth development validation: COMPLETE
+- Real Receiving AI/VLM: IMPLEMENTED
 - Official orchestrator contract: PENDING
-- Real Receiving AI/VLM: NOT IMPLEMENTED
 - Production deployment: NOT STARTED
 
 ## Architecture
@@ -24,7 +24,10 @@ Browser
 → authentication
 → tenant validation
 → request adapter
-→ mock receiving logic
+→ Receiving Agent
+   ↓
+   IF demoScenario exists → Mock logic
+   IF demoScenario absent → Real VLM (OpenAI)
 → response adapter
 → frontend
 ```
@@ -38,8 +41,10 @@ The following implementations are **PROVISIONAL / DEVELOPMENT ONLY**:
 - **Development Tenant:** Handled via environment variable `ALLOWED_TENANT` (defaults to `dev_tenant` in tests)
 - **External JSON schema:** The exact field names in the external request/response payload
 
-### Mock Receiving Logic
-The current receiving logic is purely deterministic mock/test logic designed to replicate predefined demo scenarios. **It is NOT a real AI/VLM.**
+### Mock Receiving Logic vs Real VLM
+The backend seamlessly switches between two modes:
+1. **Mock Logic:** A deterministic mock/test logic designed to replicate predefined demo scenarios.
+2. **Real VLM:** A production-ready integration with OpenAI's Vision capabilities. **Known limitation: Real VLM inference requires a funded/usable provider API account.** If the API account has no credits (429), the backend safely yields a `502 Bad Gateway` error and never hallucinates a successful result.
 
 ## Local Setup
 
@@ -94,7 +99,6 @@ The project is currently awaiting the following before proceeding to production:
 - Official Round 3 orchestrator JSON contract
 - Official authentication header specification
 - Official tenant convention specification
-- Real Receiving Manager AI/VLM implementation
 - Production-safe authentication/deployment configuration
 - Persistent storage (if required by the final orchestrator design)
 
