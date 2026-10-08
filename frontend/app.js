@@ -27,6 +27,7 @@
         const files = Array.from(event.target.files);
 
         uploadedImages = [];
+        window.demoScenario = null;
 
         imagePreview.innerHTML = "";
 
@@ -205,8 +206,8 @@
             expectedCartons,
             unitsPerCarton,
             productDescription,
-            images: [],
-            demoScenario: window.demoScenario || "correct"
+            images: uploadedImages,
+            demoScenario: window.demoScenario || undefined
         };
 
         try {
@@ -1009,7 +1010,7 @@
             "resultCard"
         ).style.display = "none";
 
-        window.demoScenario = "correct";
+        window.demoScenario = null;
 
     }
 
@@ -1067,7 +1068,7 @@
        INITIALIZATION
     ========================================== */
 
-    window.demoScenario = "correct";
+    window.demoScenario = null;
 
     updateStatistics();
 
