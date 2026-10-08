@@ -1,0 +1,540 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReceiveAI - Intelligent Receiving Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">R</div>
+            <div>
+                <h2>ReceiveAI</h2>
+                <span>Receiving Manager</span>
+            </div>
+        </div>
+
+        <div class="nav-title">Workspace</div>
+
+        <div class="nav-item active">
+            <div class="nav-icon">▦</div>
+            <span>Dashboard</span>
+        </div>
+
+        <div class="nav-item" onclick="scrollToInspection()">
+            <div class="nav-icon">⌕</div>
+            <span>New Inspection</span>
+        </div>
+
+        <div class="nav-item" onclick="scrollToHistory()">
+            <div class="nav-icon">▤</div>
+            <span>Inspection History</span>
+        </div>
+
+        <div class="nav-title">System</div>
+
+        <div class="nav-item">
+            <div class="nav-icon">⚙</div>
+            <span>Settings</span>
+        </div>
+
+        <div class="nav-item">
+            <div class="nav-icon">?</div>
+            <span>Help</span>
+        </div>
+
+        <div class="sidebar-bottom">
+            <p>AI Inspection Engine</p>
+            <strong>● Online</strong>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div class="topbar-title">
+                <h1>Receiving Manager</h1>
+                <p>Visual inventory inspection & evidence management</p>
+            </div>
+
+            <div class="user-area">
+                <div class="status-online">
+                    <span class="online-dot"></span>
+                    AI Online
+                </div>
+
+                <div class="avatar">DJ</div>
+            </div>
+
+        </header>
+
+
+        <div class="content">
+
+            <!-- HERO -->
+            <section class="hero">
+
+                <div class="hero-content">
+
+                    <div class="badge">
+                        CUBE BUILDATHON · RCV#1
+                    </div>
+
+                    <h2>Verify What Actually Arrived.</h2>
+
+                    <p>
+                        AI-powered receiving inspection that compares purchase orders
+                        with incoming shipment photographs to detect quantity,
+                        SKU, variant and visible quality issues.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- STATISTICS -->
+            <section class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+                        <span>Total Inspections</span>
+                        <div class="stat-icon">⌕</div>
+                    </div>
+
+                    <div class="stat-number" id="totalInspections">
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+                        <span>Passed</span>
+                        <div class="stat-icon">✓</div>
+                    </div>
+
+                    <div class="stat-number" id="passedInspections">
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+                        <span>Exceptions</span>
+                        <div class="stat-icon">!</div>
+                    </div>
+
+                    <div class="stat-number" id="failedInspections">
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+                        <span>Uncertain</span>
+                        <div class="stat-icon">?</div>
+                    </div>
+
+                    <div class="stat-number" id="uncertainInspections">
+                        0
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- INSPECTION -->
+            <div class="section-title" id="inspectionSection">
+
+                <div>
+                    <h2>New Receiving Inspection</h2>
+                    <p>Enter the purchase order and upload receiving photographs.</p>
+                </div>
+
+            </div>
+
+
+            <section class="inspection-grid">
+
+                <!-- PO INPUT -->
+                <div class="card">
+
+                    <h3>Purchase Order</h3>
+                    <p class="card-subtitle">
+                        Define what was expected to arrive.
+                    </p>
+
+
+                    <div class="form-group">
+
+                        <label>Purchase Order ID</label>
+
+                        <input
+                            type="text"
+                            id="poId"
+                            class="form-control"
+                            value="PO-1001"
+                            placeholder="Example: PO-1001"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>SKU / Product ID</label>
+
+                        <input
+                            type="text"
+                            id="sku"
+                            class="form-control"
+                            value="BLUE-BOTTLE-001"
+                            placeholder="Example: BLUE-BOTTLE-001"
+                        >
+
+                    </div>
+
+
+                    <div class="two-columns">
+
+                        <div class="form-group">
+
+                            <label>Expected Quantity</label>
+
+                            <input
+                                type="number"
+                                id="expectedQuantity"
+                                class="form-control"
+                                value="24"
+                                min="1"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Variant / Colour</label>
+
+                            <input
+                                type="text"
+                                id="variant"
+                                class="form-control"
+                                value="Blue"
+                                placeholder="Blue"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="two-columns">
+
+                        <div class="form-group">
+
+                            <label>Units Per Carton</label>
+
+                            <input
+                                type="number"
+                                id="unitsPerCarton"
+                                class="form-control"
+                                value="12"
+                                min="1"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Expected Cartons</label>
+
+                            <input
+                                type="number"
+                                id="expectedCartons"
+                                class="form-control"
+                                value="2"
+                                min="1"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Product Description</label>
+
+                        <input
+                            type="text"
+                            id="productDescription"
+                            class="form-control"
+                            value="Blue insulated water bottle"
+                        >
+
+                    </div>
+
+
+                    <!-- DEMO SCENARIOS -->
+                    <label style="font-size:12px;font-weight:600;display:block;margin-bottom:8px;">
+                        Demo Scenario
+                    </label>
+
+                    <div class="scenario-buttons">
+
+                        <button class="scenario-btn" onclick="loadScenario('correct')">
+                            ✓ Correct
+                        </button>
+
+                        <button class="scenario-btn" onclick="loadScenario('short')">
+                            ↓ Short
+                        </button>
+
+                        <button class="scenario-btn" onclick="loadScenario('extra')">
+                            ↑ Extra
+                        </button>
+
+                        <button class="scenario-btn" onclick="loadScenario('wrongsku')">
+                            SKU Error
+                        </button>
+
+                        <button class="scenario-btn" onclick="loadScenario('variant')">
+                            Variant
+                        </button>
+
+                        <button class="scenario-btn" onclick="loadScenario('damage')">
+                            Damage
+                        </button>
+
+                        <button class="scenario-btn" onclick="loadScenario('uncertain')">
+                            Uncertain
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PHOTOS -->
+                <div class="card">
+
+                    <h3>Receiving Photographs</h3>
+
+                    <p class="card-subtitle">
+                        Upload photographs captured at the point of receipt.
+                    </p>
+
+
+                    <label class="upload-box" for="imageInput">
+
+                        <div class="upload-icon">📷</div>
+
+                        <strong>
+                            Click to upload receiving photographs
+                        </strong>
+
+                        <span>
+                            JPG, PNG or WEBP · Multiple images supported
+                        </span>
+
+                    </label>
+
+                    <input
+                        type="file"
+                        id="imageInput"
+                        accept="image/*"
+                        multiple
+                    >
+
+
+                    <div class="image-preview" id="imagePreview"></div>
+
+
+                    <div class="alert alert-info" id="uploadAlert">
+                        Images uploaded successfully.
+                    </div>
+
+
+                    <div class="button-row">
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="clearInspection()"
+                        >
+                            Clear
+                        </button>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="runInspection()"
+                        >
+                            🔍 Inspect Shipment
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- LOADING -->
+            <div class="card loading" id="loading">
+
+                <div class="spinner"></div>
+
+                <strong>AI is inspecting the shipment...</strong>
+
+                <p style="font-size:12px;color:#64748b;margin-top:6px;">
+                    Comparing product identity, quantity, variant and visible condition.
+                </p>
+
+            </div>
+
+
+            <!-- RESULTS -->
+            <section class="card result-card" id="resultCard">
+
+                <div class="result-header">
+
+                    <div>
+                        <h3>Inspection Result</h3>
+
+                        <p class="card-subtitle" style="margin:4px 0 0;">
+                            Evidence-backed receiving decision
+                        </p>
+                    </div>
+
+                    <div id="overallDecision" class="decision">
+                        --
+                    </div>
+
+                </div>
+
+
+                <div class="checks" id="checksContainer"></div>
+
+
+                <!-- EVIDENCE -->
+                <div class="evidence-section">
+
+                    <div class="section-title" style="margin-top:20px;">
+
+                        <div>
+                            <h3>Supporting Evidence</h3>
+                            <p>
+                                Evidence used by the inspection engine
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="evidence-grid" id="evidenceGrid"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- HISTORY -->
+            <section class="card history-card" id="historySection">
+
+                <div class="section-title" style="margin-top:0;">
+
+                    <div>
+                        <h2>Inspection History</h2>
+                        <p>Recent receiving decisions</p>
+                    </div>
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="clearHistory()"
+                    >
+                        Clear History
+                    </button>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Inspection ID</th>
+                                <th>PO</th>
+                                <th>SKU</th>
+                                <th>Quantity</th>
+                                <th>Decision</th>
+                                <th>Time</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="historyBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <div class="footer">
+                ReceiveAI · CUBE Buildathon RCV#1 · Visual Receiving Inspection Agent
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="app.js"></script>
+<h2>Project Outputs</h2>
+
+<h3>Output 1</h3>
+<img src="./Output1.png" alt="Project Output 1" width="800">
+
+<h3>Output 2</h3>
+<img src="./Output2.png" alt="Project Output 2" width="800">
+
+<h3>Output 3</h3>
+<img src="./Output3.png" alt="Project Output 3" width="800">
+
+</body>
+</html>
+</body>
+</html>
