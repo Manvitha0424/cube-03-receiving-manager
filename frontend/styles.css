@@ -308,6 +308,14 @@
             cursor: pointer;
             background: #f8fafc;
             transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px;
+            width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
         }
         .upload-box:hover {
             border-color: #2563eb;
